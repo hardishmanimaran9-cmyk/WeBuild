@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WeBills Pro by WeBuilds Solution</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-language="en" data-shop="singapore">
+    <div class="splash" id="splash" aria-label="Opening screen">
+      <div class="splash-card">
+        <div class="logo-mark">WB</div>
+        <p>WeBuilds Solution</p>
+        <h1>WeBills Pro</h1>
+        <span>SINGAPORE SHOPPEE POS by WeBuilds Solution with AI billing, OCR stock loading, GST pocket, WhatsApp, and ShopOS intelligence.</span>
+        <div class="splash-progress"><i></i></div>
+      </div>
+    </div>
+
+    <section class="login-screen" id="loginScreen" aria-label="WeBills Pro login">
+      <div class="login-visual">
+        <div class="login-kicker" id="loginKicker">WeBuilds Solution</div>
+        <h1 id="loginTitle">Open WeBills Pro</h1>
+        <p id="loginSubtitle">Select the shop, enter the credentials, and continue to the live POS billing dashboard.</p>
+        <div class="login-stats">
+          <article><strong>15</strong><span id="loginStatFeatures">Live features</span></article>
+          <article><strong>2+</strong><span id="loginStatShops">Shop accounts</span></article>
+          <article><strong>AI</strong><span id="loginStatAdvisor">Owner advisor</span></article>
+        </div>
+      </div>
+
+      <div class="login-card" role="form" aria-label="Shop login">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow" id="loginShopLabel">Choose shop</p>
+            <h2 id="loginFormTitle">Secure shop login</h2>
+          </div>
+          <span class="status-pill" id="loginStatus">Demo ready</span>
+        </div>
+
+        <div class="shop-switcher" id="loginShopCards">
+          <button class="shop-login-card active" data-login-shop="singapore" type="button">
+            <strong>SINGAPORE SHOPPEE</strong>
+            <span>username: singapore</span>
+          </button>
+          <button class="shop-login-card" data-login-shop="wonders" type="button">
+            <strong>WONDERS</strong>
+            <span>username: wonders</span>
+          </button>
+        </div>
+
+        <label for="loginUsername" id="loginUsernameLabel">Email or username</label>
+        <input id="loginUsername" autocomplete="username" type="text" value="singapore" />
+
+        <label for="loginPassword" id="loginPasswordLabel">Password</label>
+        <input id="loginPassword" autocomplete="current-password" type="password" value="webills123" />
+
+        <label for="loginLanguage" id="loginLanguageLabel">Language</label>
+        <select id="loginLanguage">
+          <option value="en">English</option>
+          <option value="ta">Tamil</option>
+          <option value="hi">Hindi</option>
+          <option value="te">Telugu</option>
+          <option value="ml">Malayalam</option>
+          <option value="kn">Kannada</option>
+        </select>
+
+        <button class="primary-button full" id="loginSubmit" type="button">Open POS dashboard</button>
+        <p class="login-message" id="loginMessage">Demo password for both shops: webills123</p>
+
+        <div class="signup-divider"><span>or create your shop POS</span></div>
+
+        <div class="signup-grid">
+          <label for="signupShopName">Shop name</label>
+          <input id="signupShopName" autocomplete="organization" placeholder="Example: MY COMPUTER SHOP" type="text" />
+
+          <label for="signupEmail">Owner email</label>
+          <input id="signupEmail" autocomplete="email" placeholder="owner@example.com" type="email" />
+
+          <label for="signupPassword">Create password</label>
+          <input id="signupPassword" autocomplete="new-password" placeholder="Minimum 6 characters" type="password" />
+
+          <button class="ghost-button full" id="signupSubmit" type="button">Create account and open POS</button>
+          <p class="login-message" id="signupMessage">New shops start with default computer-parts stock and the same live features.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="app-layout locked" id="appLayout">
+      <aside class="sidebar" aria-label="Main navigation">
+        <div class="brand">
+          <div class="logo-mark">WB</div>
+          <div>
+            <strong>WeBills Pro</strong>
+            <span id="brandShopName">SINGAPORE SHOPPEE</span>
+          </div>
+        </div>
+
+        <nav class="nav">
+          <button class="nav-item active" data-view="pos" type="button"><span>01</span>POS Counter</button>
+          <button class="nav-item" data-view="voice" type="button"><span>02</span>Voice Invoice</button>
+          <button class="nav-item" data-view="scanner" type="button"><span>03</span>Photo Scan</button>
+          <button class="nav-item" data-view="inventory" type="button"><span>04</span>Stock Master</button>
+          <button class="nav-item" data-view="customers" type="button"><span>05</span>Customers</button>
+          <button class="nav-item" data-view="features" type="button"><span>15</span>Live Features</button>
+          <button class="nav-item" data-view="reports" type="button"><span>AI</span>Reports</button>
+          <button class="nav-item" data-view="cancel" type="button"><span>CN</span>Cancel Bill</button>
+          <button class="nav-item" data-view="advisor" type="button"><span>AI</span>Owner Advisor</button>
+          <button class="nav-item" data-view="integrations" type="button"><span>API</span>Integrations</button>
+        </nav>
+
+        <div class="db-card">
+          <span class="status-dot"></span>
+          <div>
+            <strong id="dbMode">Connecting</strong>
+            <p id="dbHint">Loading database status...</p>
+          </div>
+        </div>
+      </aside>
+
+      <main class="app-shell">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow" id="topProductLine">WeBills Pro by WeBuilds Solution</p>
+            <h1 id="viewTitle">SINGAPORE SHOPPEE POS</h1>
+          </div>
+          <div class="top-actions">
+            <select class="language-select" id="appLanguage" aria-label="Application language">
+              <option value="en">English</option>
+              <option value="ta">Tamil</option>
+              <option value="hi">Hindi</option>
+              <option value="te">Telugu</option>
+              <option value="ml">Malayalam</option>
+              <option value="kn">Kannada</option>
+            </select>
+            <button class="ghost-button" id="newBill" type="button">New bill</button>
+            <button class="ghost-button" id="printBillTop" type="button">Print preview</button>
+            <button class="primary-button" id="saveBill" type="button">Save invoice</button>
+            <button class="ghost-button" id="logoutButton" type="button">Logout</button>
+          </div>
+        </header>
+
+        <section class="view active" id="pos">
+          <section class="hero-counter">
+            <div class="counter-copy">
+              <p class="eyebrow">Scan-first retail workflow</p>
+              <h2>Barcode on top. Product grid below. Print, WhatsApp, GST all in one counter.</h2>
+            </div>
+            <div class="pos-command" aria-label="Barcode scanner">
+              <label for="barcodeInput">Barcode number</label>
+              <div class="scan-row">
+                <input id="barcodeInput" autocomplete="off" inputmode="text" placeholder="Scan or type 8909001, 8909002, 8909003..." type="text" />
+                <button class="primary-button" id="addBarcode" type="button">Add item</button>
+              </div>
+            </div>
+          </section>
+
+          <div class="counter-grid">
+            <section class="panel bill-panel">
+              <div class="bill-meta">
+                <div>
+                  <p class="eyebrow">Current invoice</p>
+                  <h2 id="invoiceNo">INV-1001</h2>
+                </div>
+                <div class="field-row">
+                  <label for="customerSelect">Customer</label>
+                  <select id="customerSelect"></select>
+                </div>
+                <div class="field-row">
+                  <label for="staffSelect">Staff</label>
+                  <select id="staffSelect">
+                    <option>Owner counter</option>
+                    <option>Sales executive</option>
+                    <option>Service desk</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="line-table-wrap">
+                <table class="line-table">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Computer part</th>
+                      <th>Barcode</th>
+                      <th>Serial/batch</th>
+                      <th class="num-col">Qty</th>
+                      <th class="num-col">Rate</th>
+                      <th class="num-col">GST</th>
+                      <th class="num-col">Amount</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="billRows"></tbody>
+                </table>
+              </div>
+            </section>
+
+            <aside class="panel checkout-panel">
+              <div class="panel-head tight">
+                <div>
+                  <p class="eyebrow">Checkout</p>
+                  <h2>Bill total</h2>
+                </div>
+                <span class="status-pill" id="billStatus">Draft</span>
+              </div>
+
+              <div class="total-stack">
+                <div><span>Subtotal</span><strong id="subtotal">Rs.0</strong></div>
+                <div><span>GST</span><strong id="taxTotal">Rs.0</strong></div>
+                <div><span>GST pocket</span><strong id="gstPocket">Rs.0</strong></div>
+                <div><span>Discount</span><strong id="discountTotal">Rs.0</strong></div>
+                <div class="grand-total"><span>Grand total</span><strong id="grandTotal">Rs.0</strong></div>
+              </div>
+
+              <div class="payment-grid" id="paymentGrid">
+                <button class="pay-mode active" data-payment="Cash" type="button">Cash</button>
+                <button class="pay-mode" data-payment="UPI" type="button">UPI</button>
+                <button class="pay-mode" data-payment="Card" type="button">Card</button>
+                <button class="pay-mode" data-payment="Credit" type="button">Credit</button>
+              </div>
+
+              <label for="whatsappRecipient">WhatsApp receiver</label>
+              <select id="whatsappRecipient">
+                <option value="919342402904">SURYA - 9342402904</option>
+                <option value="919360929997">HARDISH - 9360929997</option>
+              </select>
+
+              <label for="templateSelect">Invoice template</label>
+              <select id="templateSelect">
+                <option value="thermal">Thermal POS</option>
+                <option value="gst">A4 GST Invoice</option>
+                <option value="mall">Mall counter style</option>
+                <option value="service">Service + parts</option>
+                <option value="wholesale">Wholesale tax bill</option>
+                <option value="compact">Compact 58mm</option>
+                <option value="premium">Premium electronics</option>
+                <option value="warranty">Warranty + serial</option>
+                <option value="delivery">Delivery challan</option>
+                <option value="quote">Quotation proforma</option>
+              </select>
+
+              <div class="quick-products">
+                <p class="eyebrow">Quick add computer parts</p>
+                <div id="quickProducts"></div>
+              </div>
+
+              <div class="action-stack">
+                <button class="primary-button full" id="printBill" type="button">Show bill and print</button>
+                <button class="whatsapp-button full" id="shareBill" type="button">Send bill on WhatsApp</button>
+                <button class="gst-button full" id="payGst" type="button">Pay GST pocket</button>
+              </div>
+            </aside>
+          </div>
+
+          <section class="signal-strip">
+            <article><strong id="todaySales">Rs.0</strong><span>Today sales</span></article>
+            <article><strong id="invoiceCount">0</strong><span>Invoices saved</span></article>
+            <article><strong id="lowStock">0</strong><span>Low stock alerts</span></article>
+            <article><strong id="gstCollected">Rs.0</strong><span>GST collected</span></article>
+          </section>
+        </section>
+
+        <section class="view" id="voice">
+          <div class="studio-grid">
+            <section class="panel">
+              <div class="panel-head">
+                <div>
+                  <p class="eyebrow">Live feature 01</p>
+                  <h2>Voice-to-invoice engine</h2>
+                </div>
+                <span class="status-pill" id="voiceStatus">Ready</span>
+              </div>
+              <div class="voice-console">
+                <div class="mic-orb" id="micOrb"><span></span></div>
+                <div>
+                  <button class="primary-button" id="startVoice" type="button">Allow mic and speak</button>
+                  <p id="voiceSupport">Chrome microphone speech recognition is checked when this screen opens.</p>
+                </div>
+              </div>
+              <label for="voiceLanguage">Voice language</label>
+              <select id="voiceLanguage">
+                <option value="en-IN">English</option>
+                <option value="ta-IN">Tamil</option>
+                <option value="hi-IN">Hindi</option>
+                <option value="te-IN">Telugu</option>
+                <option value="ml-IN">Malayalam</option>
+                <option value="kn-IN">Kannada</option>
+              </select>
+              <div class="voice-language-note">Local-language number words and computer-part names are mapped into invoice lines.</div>
+              <label for="voiceText">Spoken order text</label>
+              <textarea id="voiceText">Bill SURYA: 2 RAM 16GB, 1 NVMe SSD 1TB, 1 gaming mouse. UPI payment.</textarea>
+              <div class="split-buttons">
+                <button class="primary-button" id="parseVoice" type="button">Convert to POS bill</button>
+                <button class="ghost-button" id="voiceSample" type="button">Load computer sample</button>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-head">
+                <div>
+                  <p class="eyebrow">Matched output</p>
+                  <h2>AI invoice lines</h2>
+                </div>
+              </div>
+              <div class="ai-result" id="voiceResult"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="scanner">
+          <div class="scanner-grid">
+            <section class="panel">
+              <div class="panel-head">
+                <div>
+                  <p class="eyebrow">Live OCR workflow</p>
+                  <h2>Photo scan to bill or inventory</h2>
+                </div>
+                <span class="status-pill" id="scanStatus">Waiting</span>
+              </div>
+              <div class="scan-mode" id="scanMode">
+                <button class="scan-tab active" data-scan-mode="sales" type="button">Photo to POS bill</button>
+                <button class="scan-tab" data-scan-mode="purchase" type="button">Purchase bill to inventory</button>
+              </div>
+              <div class="upload-zone" id="uploadZone">
+                <input id="billUpload" type="file" accept="image/*,.pdf" />
+                <div id="uploadPreview">
+                  <strong>Choose or drop bill photo</strong>
+                  <span>Uploaded file is previewed and converted into computer-parts bill lines.</span>
+                </div>
+              </div>
+              <div class="split-buttons">
+                <button class="primary-button" id="scanPurchaseBill" type="button">Scan uploaded file</button>
+                <button class="ghost-button" id="confirmInventory" type="button">Confirm inventory update</button>
+              </div>
+              <div class="scan-results" id="scanResults"></div>
+            </section>
+
+            <section class="panel visual-panel">
+              <div class="panel-head">
+                <div>
+                  <p class="eyebrow">Live extraction</p>
+                  <h2>Bill photo becomes stock or invoice lines</h2>
+                </div>
+              </div>
+              <div class="ocr-visual" aria-label="OCR extraction preview">
+                <div class="phone-frame">
+                  <div class="scan-light"></div>
+                  <div class="receipt-paper">
+                    <b>TECHZONE DISTRIBUTOR</b>
+                    <span>DDR5 RAM 16GB x 12</span>
+                    <span>NVMe SSD 1TB x 8</span>
+                    <span>USB-C Hub x 6</span>
+                    <strong>GST Rs.17,640</strong>
+                  </div>
+                </div>
+                <div class="extract-stack">
+                  <article><b>OCR</b><span>Text detected from uploaded photo/PDF</span></article>
+                  <article><b>Item match</b><span>Barcode, stock, GST, cost and MRP mapped</span></article>
+                  <article><b>Action</b><span>Add to POS bill or confirm inventory update</span></article>
+                </div>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="inventory">
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Computer stock master</p>
+                <h2>RAM, SSD, motherboard, monitor, accessories</h2>
+              </div>
+              <input id="inventorySearch" type="search" placeholder="Search RAM, SSD, barcode, serial" />
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Barcode</th>
+                    <th>Serial/batch</th>
+                    <th class="num-col">Stock</th>
+                    <th class="num-col">MRP</th>
+                    <th class="num-col">Cost</th>
+                    <th>Warranty</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="inventoryRows"></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+        <section class="view" id="customers">
+          <div class="studio-grid">
+            <section class="panel">
+              <div class="panel-head">
+                <div>
+                  <p class="eyebrow">Live feature 09</p>
+                  <h2>Customer behaviour AI</h2>
+                </div>
+              </div>
+              <div class="customer-list" id="customerRows"></div>
+            </section>
+            <section class="panel">
+              <div class="panel-head">
+                <div>
+                  <p class="eyebrow">Credit and reminders</p>
+                  <h2>Auto WhatsApp actions</h2>
+                </div>
+              </div>
+              <div class="insight-list" id="customerInsights"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="features">
+          <div class="feature-layout">
+            <section class="feature-stage">
+              <div class="feature-board" id="featureBoard"></div>
+              <div class="feature-controls">
+                <button class="ghost-button" id="featurePrev" type="button">Previous</button>
+                <strong id="featureProgress">01 / 15</strong>
+                <button class="ghost-button" id="featureNext" type="button">Next</button>
+              </div>
+              <div class="feature-dots" id="featureDots"></div>
+            </section>
+            <aside class="panel feature-detail" id="featureDetail"></aside>
+          </div>
+        </section>
+
+        <section class="view" id="reports">
+          <div class="report-grid">
+            <section class="panel">
+              <div class="panel-head">
+                <div>
+                  <p class="eyebrow">Owner cockpit</p>
+                  <h2>Live P&L, loss autopsy, tax and demand</h2>
+                </div>
+              </div>
+              <div class="pnl-grid">
+                <article><span>Revenue</span><strong id="reportRevenue">Rs.0</strong></article>
+                <article><span>COGS</span><strong id="reportCogs">Rs.1,18,200</strong></article>
+                <article><span>Net profit</span><strong id="reportProfit">Rs.24,900</strong></article>
+                <article><span>Health score</span><strong id="healthScore">84/100</strong></article>
+              </div>
+              <div class="why-box" id="whyBox">
+                <strong>WHY today is better</strong>
+                <p>SSD sales moved faster, combo keyboard + mouse added margin, and dead stock discount cleared old HDMI cables.</p>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-head">
+                <div>
+                  <p class="eyebrow">Action reports</p>
+                  <h2>Feature outputs</h2>
+                </div>
+              </div>
+              <div class="insight-list" id="reportActions"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="cancel">
+          <div class="studio-grid">
+            <section class="panel">
+              <div class="panel-head">
+                <div>
+                  <p class="eyebrow">Customer return workflow</p>
+                  <h2>Cancel saved bill and restore inventory</h2>
+                </div>
+                <span class="status-pill" id="cancelStatus">Ready</span>
+              </div>
+              <label for="cancelInvoiceNo">Invoice number</label>
+              <input id="cancelInvoiceNo" placeholder="Example: INV-1001" type="text" />
+              <label for="cancelReason">Cancellation reason</label>
+              <textarea id="cancelReason">Customer requested cancellation</textarea>
+              <button class="primary-button" id="cancelInvoice" type="button">Cancel bill and return stock</button>
+              <div class="scan-results cancel-result" id="cancelResult"></div>
+            </section>
+            <section class="panel">
+              <div class="panel-head">
+                <div>
+                  <p class="eyebrow">Laptop database</p>
+                  <h2>Recent saved invoices</h2>
+                </div>
+              </div>
+              <div class="invoice-history" id="invoiceHistory"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="advisor">
+          <div class="report-grid">
+            <section class="panel advisor-hero">
+              <div class="panel-head">
+                <div>
+                  <p class="eyebrow">Daily purchase + sales intelligence</p>
+                  <h2>Owner AI advisor</h2>
+                </div>
+                <span class="status-pill" id="advisorSource">Laptop AI</span>
+              </div>
+              <p class="muted">Uses saved bills, purchase scans, cancelled bills, low stock and 14-day movement to generate owner actions.</p>
+              <button class="primary-button" id="runAdvisor" type="button">Generate today's advice</button>
+              <div class="advisor-metrics" id="advisorMetrics"></div>
+            </section>
+            <section class="panel">
+              <div class="panel-head">
+                <div>
+                  <p class="eyebrow">Owner action list</p>
+                  <h2>Today's recommendations</h2>
+                </div>
+              </div>
+              <div class="insight-list" id="advisorResults"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="integrations">
+          <div class="assets-grid">
+            <section class="panel">
+              <div class="panel-head">
+                <div>
+                  <p class="eyebrow">Connected actions</p>
+                  <h2>WhatsApp, AI scan, voice, GST and database status</h2>
+                </div>
+              </div>
+              <div class="integration-grid">
+                <article><strong>WhatsApp bill</strong><span>SURYA 9342402904 and HARDISH 9360929997 are ready in checkout.</span></article>
+                <article><strong>Voice invoice</strong><span>Browser microphone opens live where speech recognition is supported.</span></article>
+                <article><strong>Photo scan</strong><span>Uploaded images/PDFs become POS lines or inventory purchase entries.</span></article>
+                <article><strong>GST pocket</strong><span>One-tap paid receipt is generated and stored in the laptop database.</span></article>
+                <article><strong>Laptop database</strong><span>Invoices, purchase scans, cancellations and stock updates persist on this computer.</span></article>
+                <article><strong>Owner AI advisor</strong><span>OpenAI Responses API when configured, with a working laptop rule-engine fallback.</span></article>
+              </div>
+            </section>
+            <section class="panel">
+              <div class="panel-head">
+                <div>
+                  <p class="eyebrow">ShopOS feature engine</p>
+                  <h2>All 15 live modules are available from Live Features</h2>
+                </div>
+              </div>
+              <div class="blueprint-list" id="blueprintList"></div>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="receipt-modal" id="receiptModal" aria-hidden="true">
+      <div class="receipt-shell" role="dialog" aria-label="Bill print preview">
+        <div class="modal-actions">
+          <button class="ghost-button" id="closeReceipt" type="button">Close</button>
+          <button class="ghost-button" id="modalImage" type="button">Bill image</button>
+          <button class="whatsapp-button" id="modalWhatsApp" type="button">WhatsApp</button>
+          <button class="primary-button" id="modalPrint" type="button">Print now</button>
+        </div>
+        <div class="receipt" id="receiptContent"></div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "webills-sales-model",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sales-ready WeBills ShopOS model with live POS, voice, OCR, GST, WhatsApp, and AI feature demos.",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "pg": "^8.16.0"
+  }
+}
