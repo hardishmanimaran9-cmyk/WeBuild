@@ -1,0 +1,8 @@
+data/
+node_modules/
+*.log
+.env
+tunnel-error.log
+tunnel.log
+server-error.log
+server.log
